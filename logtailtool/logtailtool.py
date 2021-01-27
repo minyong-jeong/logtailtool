@@ -6,10 +6,10 @@ import argparse
 
 
 class LogTailTool:
-    def __init__(self, filename, interval=1, read_all_file=False, pattern=None):
+    def __init__(self, filename, interval=1, read_from_begin=False, pattern=None):
         self.filename = filename
         self.interval = interval
-        self.read_all_file = read_all_file
+        self.read_from_begin = read_from_begin
         self.pattern = pattern
 
         self.openfile()
@@ -28,7 +28,7 @@ class LogTailTool:
     def openfile(self):
         self.fh = open(self.filename)
         self.curino = os.fstat(self.fh.fileno()).st_ino
-        if not self.read_all_file:
+        if not self.read_from_begin:
             self.fh.seek(0, os.SEEK_END)
 
     def is_file_rotated(self):
@@ -69,10 +69,10 @@ if __name__ == "__main__":
         help="Pattern to extract (default: None)"
     )
     parser.add_argument(
-        "-b", "--read-from-beginning",
-        dest="read_from_beginning",
+        "-b", "--read-from-begin",
+        dest="read_from_begin",
         action="store_true",
-        help="Read from the beginning of the file (default: false)"
+        help="Read from the begin of the file (default: false)"
     )
     parser.add_argument(
         "-i", "--interval",
@@ -85,7 +85,7 @@ if __name__ == "__main__":
     lines = LogTailTool(
         args.filename,
         args.interval,
-        args.read_from_beginning,
+        args.read_from_begin,
         args.pattern
     )
 
