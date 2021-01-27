@@ -2,7 +2,7 @@
 
 LogTailTool tail a log file in python.
 
-## Usage (in python code)
+## Usage (python code)
 
 ```python
 from logtailtool import LogTailTool
@@ -12,7 +12,7 @@ for line in lines:
     print(line)
 ```
 
-## Usage (command)
+## Usage (command line)
 
 ```text
 usage: logtailtool.py [-h] -f FILENAME [-p PATTERN] [-b] [-i INTERVAL]
