@@ -26,7 +26,7 @@ class LogTailTool:
         return self.read()
 
     def openfile(self):
-        self.fh = open(self.filename)
+        self.fh = open(self.filename, encoding='UTF8')
         self.curino = os.fstat(self.fh.fileno()).st_ino
         if not self.read_from_begin:
             self.fh.seek(0, os.SEEK_END)
